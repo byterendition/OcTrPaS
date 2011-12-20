@@ -5,29 +5,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LeafCell extends Cell {
-	private Cell			neighbours[]	= new Cell[8];
-	private Set<Particle>	particleSet		= new HashSet<Particle>();
+	private Cell			neighbourArr[];
+	private Set<Particle>	particleSet	= new HashSet<Particle>();
 
 	public LeafCell(int level, Cell parent, Simulation simulation) {
 		super(level, parent, simulation);
+		neighbourArr = new Cell[1 << simulation.getDim()];
 	}
 
 	@Override
 	public void reset() {
 		super.reset();
-		Arrays.fill(neighbours, null);
+		Arrays.fill(neighbourArr, null);
 	}
 
-	public Cell[] getNeighbours() {
-		return neighbours;
+	public Cell[] getAllNeighbours() {
+		return neighbourArr;
 	}
 
 	public Cell getNeighbour(int i) {
-		return neighbours[i];
+		return neighbourArr[i];
 	}
 
 	public void setNeighbour(int i, Cell neighbour) {
-		neighbours[i] = neighbour;
+		neighbourArr[i] = neighbour;
 	}
 
 	public Set<Particle> getParticleSet() {
